@@ -20,11 +20,20 @@ Add new evaluation
              <%= f.label :remarks %><br>
              <%= f.text_field :remarks, class: "form-control student_title" %>
           </div>
+          <div class="field">
+              <%= f.label "Green" %>
+              <%= f.check_box :green, class: "form-control student_title" %>
+              <%= f.label "Yellow" %>
+              <%= f.check_box :yellow, class: "form-control student_title" %><br>
+              <%= f.label "Red" %>
+              <%= f.check_box :red, class: "form-control student_title" %>
+         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= f.submit "Save", class: "btn btn-primary" %>
+        <%= f.submit "Save", class: "btn btn-primary", id: "evaluation" %>
+        <%= f.submit "Save and next student", class: "btn btn-primary", id: "evaluation" %>
       </div>
     </div>
   </div>

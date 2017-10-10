@@ -15,12 +15,15 @@ class EvaluationsController < ApplicationController
   end
 
   def create
-    student = Student.find(params[:student_id])
+    @evaluation = Evaluation.new
 
-    @evaluation = student.evaluations.create(evaluation_params)
+    @student = Student.find(params[:student_id])
+
+    @evaluation = @student.evaluations.create(evaluation_params)
+    @evaluation.student_id = @student.id
 
       if @evaluation.save
-         redirect_to batches_path_students_path
+         redirect_to @evaluation.student.batch
       else
         render :new
       end
@@ -30,6 +33,6 @@ class EvaluationsController < ApplicationController
 
   private
   def evaluation_params
-    params.require(:evaluation).permit(:remarks, :student_id)
+    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id)
   end
 end
