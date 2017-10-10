@@ -1,5 +1,6 @@
 Student.destroy_all
 Batch.destroy_all
+Evaluation.destroy_all
 
 
 batch1 = Batch.create!(name: "Batch #10", startdate: "28-08-2017", enddate: "08-11-2017")

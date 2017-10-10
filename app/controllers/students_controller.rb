@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-    batch = Batch.find(params[:batch_id])
+    batch = Batch.find(params[:id])
     @student = batch.students.find(params[:id])
   end
 
