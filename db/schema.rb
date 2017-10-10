@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009212310) do
+ActiveRecord::Schema.define(version: 20171010090124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20171009212310) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "evaluations", force: :cascade do |t|
+    t.string "remarks"
+    t.boolean "green"
+    t.boolean "yellow"
+    t.boolean "red"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -31,7 +40,9 @@ ActiveRecord::Schema.define(version: 20171009212310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "batch_id"
+    t.bigint "evaluation_id"
     t.index ["batch_id"], name: "index_students_on_batch_id"
+    t.index ["evaluation_id"], name: "index_students_on_evaluation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,4 +63,5 @@ ActiveRecord::Schema.define(version: 20171009212310) do
   end
 
   add_foreign_key "students", "batches"
+  add_foreign_key "students", "evaluations"
 end
