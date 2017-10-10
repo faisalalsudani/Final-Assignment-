@@ -1,10 +1,13 @@
-
 <h2><%= @student.batch.name %></h2>
 <div class="row">
-  <div class="col-md-4">
-    <h1><%= @student.first_name %> <%= @student.last_name %></h1>
-    <% @student.evaluations.each do |e| %>
-      <p><%= e.remarks %></p>
-    <% end %>
-  </div>
+  <h3>Add new evaluation</h3>
+  <%= render "addEvaluationForm" %>
 </div>
+<div class="row">
+  <h2><%= @student.first_name %> <%= @student.last_name %></h2>
+  <hr>
+  <% @student.evaluations.each do |evaluation| %>
+    <p><%= evaluation.remarks %></p>
+  <% end %>
+</div>
+<hr>

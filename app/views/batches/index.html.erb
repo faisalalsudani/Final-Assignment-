@@ -1,5 +1,7 @@
 <h2>All batches</h2>
-
+<hr>
+<p><%= link_to "Add new batch", new_batch_path, class: "btn btn-default" %></p>
+<hr>
 <div class="row">
   <% @batches.each do |batch| %>
     <p><%= batch.name %></p>

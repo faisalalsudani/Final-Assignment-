@@ -1,0 +1,21 @@
+<%= form_for @batch, html: { multipart: true } do |f| %>
+  <div class="form-group">
+    <label>Batch name</label>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Start date</label>
+    <%= f.date_select :startdate, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>End date</label>
+    <%= f.date_select :enddate, class: "form-control" %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
