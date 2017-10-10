@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-md-4">
+    <h1><%= @batch.name %></h1>
+    <% @students.each do |s| %>
+      <p><%= s.first_name %> <span>- <%= s.label %></span></p>
+    <% end %>
+  </div>
+</div>

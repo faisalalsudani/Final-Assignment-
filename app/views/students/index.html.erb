@@ -1,0 +1,21 @@
+<div class="row">
+  <% @students.each do |s| %>
+    <% if s.label === "Green"%>
+    <p style="border:solid 1px green; padding:5px;"><%= s.first_name %> <span>- <%= s.label %></span></p>
+    <% end %>
+  <% end %>
+</div>
+<div class="row">
+  <% @students.each do |s| %>
+    <% if s.label === "Yello"%>
+    <p style="border:solid 1px #d2b105; padding:5px;"><%= s.first_name %> <span>- <%= s.label %></span></p>
+    <% end %>
+  <% end %>
+</div>
+<div class="row">
+  <% @students.each do |s| %>
+    <% if s.label === "Red"%>
+    <p style="border:solid 1px red; padding:5px;"><%= s.first_name %> <span>- <%= s.label %></span></p>
+    <% end %>
+  <% end %>
+</div>
