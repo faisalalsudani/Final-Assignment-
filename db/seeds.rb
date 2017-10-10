@@ -1,9 +1,11 @@
 Student.destroy_all
 Batch.destroy_all
+Evaluation.destroy_all
 
 
 batch1 = Batch.create!(name: "Batch #10", startdate: "28-08-2017", enddate: "08-11-2017")
 batch2 = Batch.create!(name: "Batch #11", startdate: "28-10-2017", enddate: "08-01-2018")
+
 
 student1 = Student.create!(first_name: "Faisal", last_name: "Al-Sudani", label: "Green", photo: "no.pic" ,batch: batch2)
 student2 = Student.create!(first_name: "JOB", last_name: "Weeda", label: "Red", photo: "no.pic" ,batch: batch2)
@@ -13,3 +15,25 @@ student5 = Student.create!(first_name: "Cristiano", last_name: "Ronaldo", label:
 student6 = Student.create!(first_name: "Serio", last_name: "Ramos", label: "Green", photo: "no.pic" ,batch: batch2)
 student7 = Student.create!(first_name: "Alvaro", last_name: "Morata", label: "Red", photo: "no.pic" ,batch: batch1)
 student8 = Student.create!(first_name: "Lionel", last_name: "Messi", label: "Green", photo: "no.pic" ,batch: batch2)
+
+evaluation_1 = Evaluation.create!(
+  remarks: "Good answers, fulled after asking a question",
+  green:true,
+  yellow:false,
+  red:false,
+  student: student1
+)
+evaluation_2 = Evaluation.create!(
+  remarks: "Not so good answers, fulled after asking a question",
+  green:false,
+  yellow:true,
+  red:false,
+  student: student2
+)
+evaluation_3 = Evaluation.create!(
+  remarks: "Bad answers, fulled after asking a question",
+  green:false,
+  yellow:false,
+  red:true,
+  student: student3
+)
