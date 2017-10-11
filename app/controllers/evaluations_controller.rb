@@ -1,4 +1,9 @@
 class EvaluationsController < ApplicationController
+
+  before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
+  before_action :set_student
+
+
   def index
     @evaluations = Evaluation.all
   end
@@ -34,6 +39,14 @@ class EvaluationsController < ApplicationController
 
   end
 
+
+  def set_evaluation
+      @evaluation = Evaluation.find(params[:id])
+  end
+
+  def set_student
+    @student = Student.find(params[:student_id])
+  end
 
   private
   def evaluation_params
