@@ -32,7 +32,7 @@ class Batch < ApplicationRecord
      yellow = @yellow_evaluations.sample
      red = @red_evaluations.sample
 
-     puts picked = rand(1..10)
+     
   end
 
 
