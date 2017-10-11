@@ -1,12 +1,46 @@
 <h1><%= @batch.name %> <span>- <%= @batch.students.length %> Students</span></h1>
 <hr>
 
+<% green_evaluations = [] %>
+<% yellow_evaluations = [] %>
+<% red_evaluations = [] %>
+
+<% @batch.students.each do |s| %>
+  <% s.evaluations.last(1).each do |last_eva| %>
+    <% if last_eva.yellow === true %>
+      <% yellow_evaluations.push(last_eva.yellow) %>
+    <% elsif last_eva.green === true %>
+      <% green_evaluations.push(last_eva.green) %>
+    <% else %>
+      <% red_evaluations.push(last_eva.red) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= @batch.students_within_this_batch %>
+<%= @batch.random_student %>
+
+<% g = green_evaluations.length %>
+<% y = yellow_evaluations.length %>
+<% r = red_evaluations.length %>
+
+<% total = @batch.students.length %>
+
+<% green_procent = (g.fdiv(total)) * 100 %>
+<% yellow_procent = (y.fdiv(total)) * 100 %>
+<% red_procent = (r.fdiv(total)) * 100 %>
 
 <div class="row">
   <div class="progress">
-    <% @batch.students.each do |student| %>
-
-    <% end %>
+    <div class="progress-bar progress-bar-success" style="width:<%= green_procent %>%">
+      <%= green_procent %>
+    </div>
+    <div class="progress-bar progress-bar-warning" style="width:<%= yellow_procent %>%">
+      <%= yellow_procent %>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width:<%= red_procent %>%">
+      <%= red_procent %>
+    </div>
   </div>
 </div>
 
@@ -21,8 +55,16 @@
     <p><%= link_to student.first_name, batch_student_path(@batch, student),  :class => '' %></p>
     <p>Evaluations: <%= student.evaluations.length %></p>
     <% student.evaluations.last(1).each do |e|%>
-      <p>Last evaluation: <%= e.remarks %></p>
-      <p>Points: <%= e.points %></p>
+      <% if e.green === true %>
+        <p style="background:#5cb85c; height: 20px;border-radius:4px;"></p>
+      <% elsif e.yellow === true %>
+        <p style="background:#f0ad4e; height: 20px;border-radius:4px;"></p>
+      <% elsif e.red === true %>
+        <p style="background:#d9534f; height: 20px;border-radius:4px;"></p>
+      <% else %>
+        <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
+      <% end %>
+      <!-- <p>Points: <%= e.points %></p> -->
     <% end %>
     <p> <%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
   </div>

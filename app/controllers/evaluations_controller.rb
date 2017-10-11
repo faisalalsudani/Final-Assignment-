@@ -20,7 +20,6 @@ class EvaluationsController < ApplicationController
   end
 
   def create
-
     if params[:save_next]
       @student = Student.find(params[:student_id])
       @evaluation = Evaluation.new(evaluation_params)
@@ -50,6 +49,6 @@ class EvaluationsController < ApplicationController
 
   private
   def evaluation_params
-    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id)
+    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id, :points)
   end
 end
