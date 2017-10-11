@@ -4,6 +4,6 @@
 <hr>
 <div class="row">
   <% @batches.each do |batch| %>
-    <p><%= batch.name %></p>
+    <h4 class="card-title"><%= link_to batch.name, batch_path(batch) %></h4>
   <% end %>
 </div>

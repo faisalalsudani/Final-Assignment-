@@ -3,11 +3,44 @@
   <h3>Add new evaluation</h3>
   <%= render "addEvaluationForm" %>
 </div>
+
 <div class="row">
   <h2><%= @student.first_name %> <%= @student.last_name %></h2>
   <hr>
+    <% total = @student.evaluations.length - 1 %>
+    <%= total  %>
+  <hr>
+  <div class="label label-success">
+    <% green = @student.evaluations.where(green: true).length %>
+    <%=  (green.fdiv(total)) * 100 %>
+  </div>
+
+  <div class="label label-warning">
+    <% yellow = @student.evaluations.where(yellow: true).length %>
+    <%=  (yellow.fdiv(total)) * 100 %>
+  </div>
+
+  <div class="label label-danger">
+    <% red = @student.evaluations.where(red: true).length %>
+    <%=  (red.fdiv(total)) * 100 %>
+  </div>
+
+  <hr>
+
   <% @student.evaluations.each do |evaluation| %>
-    <p><%= evaluation.remarks %></p>
+
+    <% if evaluation.green? === true %>
+      <p style="border:solid 1px green; padding:5px;"><%= evaluation.remarks %></p>
+    <% end %>
+
+    <% if evaluation.yellow? === true %>
+      <p style="border:solid 1px yellow; padding:5px;"><%= evaluation.remarks %></p>
+    <% end %>
+
+    <% if evaluation.red? === true %>
+      <p style="border:solid 1px red; padding:5px;"><%= evaluation.remarks %></p>
+    <% end %>
+
   <% end %>
 </div>
 <hr>

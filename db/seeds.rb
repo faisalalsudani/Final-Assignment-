@@ -14,7 +14,3 @@ student5 = Student.create!(first_name: "Cristiano", last_name: "Ronaldo", label:
 student6 = Student.create!(first_name: "Serio", last_name: "Ramos", label: "Green", photo: "no.pic" ,batch: batch2)
 student7 = Student.create!(first_name: "Alvaro", last_name: "Morata", label: "Red", photo: "no.pic" ,batch: batch1)
 student8 = Student.create!(first_name: "Lionel", last_name: "Messi", label: "Green", photo: "no.pic" ,batch: batch2)
-
-evaluation1 = Evaluation.create!(remarks: "Good work!", student: student1, green: true, yellow:false, red:false)
-evaluation2 = Evaluation.create!(remarks: "Not good work!", student: student1)
-evaluation3 = Evaluation.create!(remarks: "Google more!", student: student2)

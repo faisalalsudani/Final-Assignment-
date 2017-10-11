@@ -1,18 +1,22 @@
-  <h1><%= @batch.name %> <span>- <%= @batch.students.length %> Students</span></h1>
-  <hr>
-  <%= render "addStudentForm" %>
-  <div class="row">
-    <% @batch.students.each do |student| %>
-      <% if student.label === "Green"%>
-      <p style="border:solid 1px green; padding:5px;"><%= student.first_name %> <span>- <%= student.label %></span></p>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="row">
-    <% @batch.students.each do |student| %>
-      <% if student.label === "Red"%>
-      <p style="border:solid 1px red; padding:5px;"><%= student.first_name %> <span>- <%= student.label %></span></p>
-      <% end %>
-    <% end %>
-  </div>
+<h1><%= @batch.name %> <span>- <%= @batch.students.length %> Students</span></h1>
+<hr>
+<%= total = @batch.students.length %>
+<br>
+<%= green = @student.evaluations.where(green: false).length %>
+<%= @student.label %>
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 35%"></div>
+  <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 20%"></div>
+  <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 10%"></div>
+  <div class="progress-bar progress-bar-primary progress-bar-striped active" style="width: 35%"></div>
+</div>
+<div class="row">
+<%= render "addStudentForm" %>
+</div>
+<br>
+<div class="row">
+  <% @batch.students.each do |student| %>
+  <p><%= link_to student.first_name, batch_student_path(@batch, student),  :class => '' %></p>
+  <p> <%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
+  <% end %>
+</div>
