@@ -3,8 +3,8 @@ Batch.destroy_all
 Evaluation.destroy_all
 
 
-batch1 = Batch.create!(name: "Batch #10", startdate: "28-08-2017", enddate: "08-11-2017")
-batch2 = Batch.create!(name: "Batch #11", startdate: "28-10-2017", enddate: "08-01-2018")
+batch1 = Batch.create!(name: "Batch #10", start_date: "28-08-2017", end_date: "08-11-2017")
+batch2 = Batch.create!(name: "Batch #11", start_date: "28-10-2017", end_date: "08-01-2018")
 
 student1 = Student.create!(first_name: "Faisal", last_name: "Al-Sudani", label: "Green", photo: "no.pic" ,batch: batch2)
 student2 = Student.create!(first_name: "JOB", last_name: "Weeda", label: "Red", photo: "no.pic" ,batch: batch2)
