@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
     @student = batch.students.create(student_params)
 
       if @student.save
-         redirect_to @batch, notice: "Evaluation have been add!"
+         redirect_to @student.batch
       else
         render :new
       end

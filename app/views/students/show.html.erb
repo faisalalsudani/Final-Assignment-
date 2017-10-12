@@ -2,7 +2,12 @@
 
 <div class="row">
   <h3>Add new evaluation</h3>
-  <%= render "addEvaluationForm" %>
+  <% if @student.evaluations.where("created_at::date = ?", Date.today).length > 0 %>
+      <button type="button" class="btn btn-primary disabled">There is already evaluation for this student Today!</button>
+  <% else %>
+      <%= render "addEvaluationForm" %>
+  <% end %>
+
 </div>
 
 <div class="row student-evaluations">
@@ -10,13 +15,11 @@
   <hr>
 
   <% @student.evaluations.each do |evaluation| %>
-
     <% if evaluation.green? === true %>
-      <p style="border:solid 1px green; padding:5px;"><%= evaluation.remarks %>
+      <p style="border:solid 1px green; padding:5px;"><%= evaluation.remarks %> - <span>Evaluated on: <%= evaluation.created_at %></span>
       <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
       <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
       </p>
-
     <% end %>
 
     <% if evaluation.yellow? === true %>
@@ -24,7 +27,6 @@
       <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
       <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
     </p>
-
     <% end %>
 
     <% if evaluation.red? === true %>
@@ -32,10 +34,7 @@
       <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
       <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
     </p>
-
     <% end %>
-
-
 
   <% end %>
 </div>

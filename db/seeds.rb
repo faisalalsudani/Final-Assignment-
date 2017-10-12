@@ -14,3 +14,5 @@ student5 = Student.create!(first_name: "Cristiano", last_name: "Ronaldo", label:
 student6 = Student.create!(first_name: "Serio", last_name: "Ramos", label: "Green", photo: "no.pic" ,batch: batch2)
 student7 = Student.create!(first_name: "Alvaro", last_name: "Morata", label: "Red", photo: "no.pic" ,batch: batch1)
 student8 = Student.create!(first_name: "Lionel", last_name: "Messi", label: "Green", photo: "no.pic" ,batch: batch2)
+
+eva = Evaluation.create!(remarks: "Good work", green: true, yellow:false, red:false, student: student1, created_at: (rand*10).days.ago)

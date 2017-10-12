@@ -24,7 +24,6 @@ class EvaluationsController < ApplicationController
       @student = Student.find(params[:student_id])
       @evaluation = Evaluation.new(evaluation_params)
       @evaluation.student_id = params[:student_id]
-      @evaluation.date = DateTime
       @evaluation.save
       @student_next = Student.where('id > ?', params[:student_id]).first
       redirect_to batch_student_path(@student_next.batch, @student_next.id)
@@ -33,7 +32,6 @@ class EvaluationsController < ApplicationController
       @student = Student.find(params[:student_id])
       @evaluation = @student.evaluations.create(evaluation_params)
       @evaluation.student_id = @student.id
-      @evaluation.date = DateTime
       if @evaluation.save
         redirect_to @evaluation.student.batch
       else
