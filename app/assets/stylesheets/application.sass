@@ -1,7 +1,6 @@
-// application.scss
-
 @import "bootstrap-sprockets"
 @import "bootstrap"
+
 
 .student-evaluations p:last-child
   display: none
@@ -37,28 +36,35 @@
   span
     font-weight: normal
 
-.green
-  height: 50px
-  width: 50px
-  background: #dff0d8
-  color: #dff0d8
-  margin-top: 10px
-  margin-bottom: 10px
-  margin-right: 10px
+label
+  padding-left: 30px
+  font-size: 14px
+  cursor: pointer
+  display: block
 
-.yellow
-  height: 50px
-  width: 50px
-  background: #f2dede
-  color: #f2dede
-  margin-top: 10px
-  margin-bottom: 10px
-  margin-right: 10px
+label:before, label:after
+  font-size: 25px
+  background: green
+  display: none
+  position: inherit
+  top: 0
+  left: 0
+label:before
+  content: ""
+  display: inline-block
+  width: 30px
+  height: 30px
 
-.red
-  height: 50px
-  width: 50px
-  background: #f2dede
-  color: #f2dede
-  margin-top: 10px
-  margin-bottom: 10px
+label:after
+  content: ""
+  display: inline-block
+  width: 30px
+  height: 30px
+  overflow: hidden
+  opacity: 0.5
+
+input[type="checkbox"]
+  display: none
+  &:checked + label:after
+    background: #ededed
+    opacity: 1

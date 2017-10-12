@@ -11,6 +11,8 @@ gem 'devise', '~> 4.2'
 # Use Bootstrap for styling
 gem 'bootstrap-sass', '~> 3.3.6'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 # Use jQuery for easier javascript
 gem 'jquery-rails', '~> 4.3.1'
 
