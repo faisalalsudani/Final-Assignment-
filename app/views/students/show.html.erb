@@ -1,30 +1,41 @@
 <h2><%= @student.batch.name %></h2>
+
 <div class="row">
   <h3>Add new evaluation</h3>
   <%= render "addEvaluationForm" %>
 </div>
 
-<div class="row">
+<div class="row student-evaluations">
   <h2><%= @student.first_name %> <%= @student.last_name %></h2>
   <hr>
 
   <% @student.evaluations.each do |evaluation| %>
 
     <% if evaluation.green? === true %>
-      <p style="border:solid 1px green; padding:5px;"><%= evaluation.remarks %></p>
+      <p style="border:solid 1px green; padding:5px;"><%= evaluation.remarks %>
+      <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
+      <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
+      </p>
+
     <% end %>
 
     <% if evaluation.yellow? === true %>
-      <p style="border:solid 1px yellow; padding:5px;"><%= evaluation.remarks %></p>
+      <p style="border:solid 1px yellow; padding:5px;"><%= evaluation.remarks %>
+      <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
+      <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
+    </p>
+
     <% end %>
 
     <% if evaluation.red? === true %>
-      <p style="border:solid 1px red; padding:5px;"><%= evaluation.remarks %></p>
+      <p style="border:solid 1px red; padding:5px;"><%= evaluation.remarks %>
+      <p> <%= link_to 'Delete evaluation', student_evaluation_path(@student, evaluation), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_evaluation btn-sm btn-danger' %></p>
+      <p> <%= link_to 'Edit evaluation', edit_student_evaluation_path(@student, evaluation),:class => 'delete_evaluation btn-sm btn-primary' %></p>
+    </p>
+
     <% end %>
 
-    <% if evaluation.green? === false && evaluation.yellow? === false && evaluation.red? === false  %>
-      <p style="border:solid 1px black; padding:5px;"><%= evaluation.remarks %></p>
-    <% end %>
+
 
   <% end %>
 </div>

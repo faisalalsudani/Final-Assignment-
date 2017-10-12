@@ -1,0 +1,24 @@
+<%= form_for [@batch, @student] do |form| %>
+
+  <div class="box_style batch_create">
+
+    <div class="field">
+      <%= form.label :first_name %><br>
+      <%= form.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :last_name %><br>
+      <%= form.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :photo %><br>
+      <%= form.text_field :photo %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>

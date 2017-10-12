@@ -64,9 +64,9 @@
       <% else %>
         <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
       <% end %>
-      <!-- <p>Points: <%= e.points %></p> -->
     <% end %>
     <p> <%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
+    <p> <%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'delete_evaluation btn-sm btn-primary' %></p>
   </div>
   <% end %>
 </div>

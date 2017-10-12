@@ -1,0 +1,28 @@
+<%= form_for [@student, @evaluation] do |form| %>
+
+  <div class="box_style batch_create">
+
+    <div class="field">
+      <%= form.label :remarks %>
+      <br>
+      <%= form.text_area :remarks %>
+    </div>
+    <div class="field">
+      <%= form.label :green %>
+      <%= form.check_box :green %>
+
+    </div>
+    <div class="field">
+      <%= form.label :yellow %>
+      <%= form.check_box :yellow %>
+    </div>
+    <div class="field">
+      <%= form.label :red %>
+      <%= form.check_box :red %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>
