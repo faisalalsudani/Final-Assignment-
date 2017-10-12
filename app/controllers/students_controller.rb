@@ -33,12 +33,11 @@ class StudentsController < ApplicationController
   end
 
   def update
-    batch = Batch.find(params[:batch_id])
-
-    @student = batch.students.find(params[:id])
+    puts "#" * 50
+    @student = Student.find(params[:id])
 
     if @student.update_attributes(student_params)
-      redirect_to @student.batch, notice: "Student updated"
+      redirect_to @student.batch, notice: "Evaluation updated"
     else
       render :edit
     end

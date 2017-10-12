@@ -3,7 +3,7 @@ class Batch < ApplicationRecord
   has_many :students
 
   def students_within_this_batch
-    @batch        = Batch.find(id)
+    @batch = Batch.find(id)
 
     @green_evaluations = []
     @yellow_evaluations = []
@@ -25,14 +25,14 @@ class Batch < ApplicationRecord
     end
 
     print @red_evaluations
+    print @green_evaluations
+    print @yellow_evaluations
   end
 
   def random_student
      green = @green_evaluations.sample
      yellow = @yellow_evaluations.sample
      red = @red_evaluations.sample
-
-     
   end
 
 

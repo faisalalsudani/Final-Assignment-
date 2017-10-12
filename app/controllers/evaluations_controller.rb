@@ -24,6 +24,7 @@ class EvaluationsController < ApplicationController
       @student = Student.find(params[:student_id])
       @evaluation = Evaluation.new(evaluation_params)
       @evaluation.student_id = params[:student_id]
+      @evaluation.date = DateTime
       @evaluation.save
       @student_next = Student.where('id > ?', params[:student_id]).first
       redirect_to batch_student_path(@student_next.batch, @student_next.id)
@@ -32,8 +33,29 @@ class EvaluationsController < ApplicationController
       @student = Student.find(params[:student_id])
       @evaluation = @student.evaluations.create(evaluation_params)
       @evaluation.student_id = @student.id
-      @evaluation.save
-      redirect_to @evaluation.student.batch
+      @evaluation.date = DateTime
+      if @evaluation.save
+        redirect_to @evaluation.student.batch
+      else
+        redirect_to @evaluation.student.batch, alert: "There is already evaluations for this day"
+      end
+    end
+
+  end
+
+  def edit
+    @student = Student.find(params[:student_id])
+    @evaluation = Evaluation.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:student_id])
+    @evaluation = Evaluation.find(params[:id])
+
+    if @evaluation.update_attributes(evaluation_params)
+      redirect_to @evaluation.student.batch, notice: "Evaluation updated"
+    else
+      render :edit
     end
 
   end
@@ -47,8 +69,17 @@ class EvaluationsController < ApplicationController
     @student = Student.find(params[:student_id])
   end
 
+  def destroy
+    @evaluation = Evaluation.find(params[:id])
+
+    @evaluation.destroy
+    redirect_to @student.batch
+  end
+
+
+
   private
   def evaluation_params
-    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id, :points)
+    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id, :date)
   end
 end
