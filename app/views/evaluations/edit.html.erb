@@ -1,28 +1,26 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <h2>Edit evaluation</h2>
 <%= form_for [@student, @evaluation] do |form| %>
-
   <div class="box_style batch_create">
-
     <div class="field">
-      <%= form.label :remarks %>
+      <!-- <%= form.label :remarks %> -->
       <br>
-      <%= form.text_area :remarks %>
+      <%= form.text_area :remarks, class: "form-control" %>
     </div>
-    <div class="field">
-      <%= form.label :green %>
+    <div class="field" style="display:inline-flex;" >
       <%= form.check_box :green %>
-
-    </div>
-    <div class="field">
-      <%= form.label :yellow %>
+      <%= form.label :green, "Green", class: "green" %><br>
       <%= form.check_box :yellow %>
-    </div>
-    <div class="field">
-      <%= form.label :red %>
+      <%= form.label :yellow, "Yellow", class: "yellow" %><br>
       <%= form.check_box :red %>
-    </div>
+      <%= form.label :red, "Red", class: "red" %>
+   </div>
 
     <div class="actions">
-      <%= form.submit %>
+      <%= form.submit "Update", class: "btn btn-block btn-primary" %>
     </div>
   </div>
 <% end %>
+  </div>
+</div>
