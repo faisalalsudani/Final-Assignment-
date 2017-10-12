@@ -1,6 +1,8 @@
 class Batch < ApplicationRecord
 
   has_many :students
+  validates :name, presence: { message: "You have to add Batch name" }
+
 
   def students_within_this_batch
     @batch = Batch.find(id)
