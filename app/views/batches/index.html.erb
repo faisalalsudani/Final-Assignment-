@@ -6,7 +6,9 @@
   <% @batches.each do |batch| %>
     <div class="col-md-3 batches">
       <h4 class="card-title"><%= link_to batch.name, batch_path(batch) %></h4>
-      <p>Started on: <span> <%= batch.startdate %></span></p>
+      <p>Started on: <span>
+        <%= batch.startdate %>
+      </span></p>
       <p>End on: <span> <%= batch.enddate %></span></p>
     </div>
   <% end %>

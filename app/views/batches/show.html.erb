@@ -1,4 +1,4 @@
-<h1><%= @batch.name %> <span>- <%= @batch.students.length %> Students</span></h1>
+<h1><%= @batch.name %> <span>- <%= @batch.students.length %> Students</span> - <span><%= render "addStudentForm" %></span></h1>
 <hr>
 
 <% green_evaluations = [] %>
@@ -17,8 +17,67 @@
   <% end %>
 <% end %>
 
-<%= @batch.students_within_this_batch %>
-<%= @batch.random_student %>
+<% @batch.students_within_this_batch %>
+
+
+<div class="row">
+  <button type="button" class="btn btn-primary add-student" data-toggle="modal" data-target="#addNewEvaluation">
+  Evaluate a student
+  </button>
+  <br>
+  <br>
+</div>
+
+<div class="modal fade" id="addNewEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Daily evaluation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p><% randomStudent = @batch.random_student %></p>
+      <% @batch.students.each do |student| %>
+          <% if student.id === randomStudent %>
+            <%= "#{student.first_name} #{student.last_name}" %>
+            <% @student = @batch.students.find(student.id) %>
+            <% @evaluation = Evaluation.new %>
+            <%= form_for [@student, @evaluation] do |f| %>
+              <div class="field">
+                <%= f.label :remarks %><br>
+                <%= f.text_field :remarks, class: "form-control student_title" %>
+              </div>
+              <div class="field">
+                 <%= f.label :date %><br>
+                 <%= f.date_field :date, :value => Time.now.strftime('%Y-%m-%d'), class: "form-control student_title" %>
+              </div>
+
+              <div class="field">
+                  <%= f.label "Green" %>
+                  <%= f.check_box :green %><br>
+
+                  <%= f.label "Yellow" %>
+                  <%= f.check_box :yellow%><br>
+
+                  <%= f.label "Red" %>
+                  <%= f.check_box :red%>
+             </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= f.submit "Save", class: "btn btn-primary", id: "evaluation" %>
+            <%= f.submit "Save and next student", class: "btn btn-primary", name: "save_next" %>
+          </div>
+          <% end %>
+          <% end %>
+          <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <% g = green_evaluations.length %>
 <% y = yellow_evaluations.length %>
@@ -44,10 +103,6 @@
   </div>
 </div>
 
-
-<div class="row">
-<%= render "addStudentForm" %>
-</div>
 <br>
 <div class="row">
   <% @batch.students.each do |student| %>

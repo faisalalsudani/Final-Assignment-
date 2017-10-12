@@ -22,14 +22,17 @@ Add new evaluation
           </div>
 
           <div class="field">
-              <%= f.label "Green" %>
-              <%= f.check_box :green %><br>
+             <%= f.label :date %><br>
+             <%= f.date_field :date, :value => Time.now.strftime('%Y-%m-%d'), class: "form-control student_title" %>
+          </div>
 
-              <%= f.label "Yellow" %>
-              <%= f.check_box :yellow%><br>
-
-              <%= f.label "Red" %>
-              <%= f.check_box :red%>
+          <div class="field" class="checkbox-inline">
+            <%= f.check_box :green %>
+            <%= f.label :green, "Green", class: "green" %><br>
+            <%= f.check_box :yellow %>
+            <%= f.label :yellow, "Yellow", class: "yellow" %><br>
+            <%= f.check_box :red %>
+            <%= f.label :red, "Red", class: "red" %>
          </div>
 
       </div>
