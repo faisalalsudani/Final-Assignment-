@@ -4,6 +4,7 @@
 <% green_evaluations = [] %>
 <% yellow_evaluations = [] %>
 <% red_evaluations = [] %>
+<% no_evaluations = [] %>
 
 <% @batch.students.each do |s| %>
   <% s.evaluations.last(1).each do |last_eva| %>
@@ -11,8 +12,10 @@
       <% yellow_evaluations.push(last_eva.yellow) %>
     <% elsif last_eva.green === true %>
       <% green_evaluations.push(last_eva.green) %>
-    <% else %>
+    <% elsif last_eva.red === true %>
       <% red_evaluations.push(last_eva.red) %>
+    <% else %>
+      <% no_evaluations.push(last_eva.red) %>
     <% end %>
   <% end %>
 <% end %>
@@ -21,7 +24,7 @@
 
 
 <div class="row">
-  <button type="button" class="btn btn-primary add-student" data-toggle="modal" data-target="#addNewEvaluation">
+  <button type="button" class="btn btn-primary random-student" data-toggle="modal" data-target="#addNewEvaluation">
   Evaluate a student
   </button>
   <br>
@@ -54,18 +57,16 @@
                  <%= f.date_field :date, :value => Time.now.strftime('%Y-%m-%d'), class: "form-control student_title" %>
               </div>
 
-              <div class="field">
-                  <%= f.label "Green" %>
-                  <%= f.check_box :green %><br>
-
-                  <%= f.label "Yellow" %>
-                  <%= f.check_box :yellow%><br>
-
-                  <%= f.label "Red" %>
-                  <%= f.check_box :red%>
+              <div class="field" style="display:inline-flex;" >
+                <%= f.check_box :green %>
+                <%= f.label :green, "Green", class: "green" %><br>
+                <%= f.check_box :yellow %>
+                <%= f.label :yellow, "Yellow", class: "yellow" %><br>
+                <%= f.check_box :red %>
+                <%= f.label :red, "Red", class: "red" %>
              </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" onclick="javascript:window.location.reload()" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <%= f.submit "Save", class: "btn btn-primary", id: "evaluation" %>
             <%= f.submit "Save and next student", class: "btn btn-primary", name: "save_next" %>
           </div>
@@ -82,24 +83,24 @@
 <% g = green_evaluations.length %>
 <% y = yellow_evaluations.length %>
 <% r = red_evaluations.length %>
+<% no = g + y + r %>
 
 <% total = @batch.students.length %>
+<% total_no_evaluation = (total - no) %>
 
 <% green_procent = (g.fdiv(total)) * 100 %>
 <% yellow_procent = (y.fdiv(total)) * 100 %>
 <% red_procent = (r.fdiv(total)) * 100 %>
+<% no_procent = (total_no_evaluation.fdiv(total)) * 100 %>
 
 <div class="row">
   <div class="progress">
-    <div class="progress-bar progress-bar-success" style="width:<%= green_procent %>%">
-      <%= green_procent %>
-    </div>
-    <div class="progress-bar progress-bar-warning" style="width:<%= yellow_procent %>%">
-      <%= yellow_procent %>
-    </div>
-    <div class="progress-bar progress-bar-danger" style="width:<%= red_procent %>%">
-      <%= red_procent %>
-    </div>
+    <div class="progress-bar progress-bar-success" style="width:<%= green_procent %>%"></div>
+    <div class="progress-bar progress-bar-warning" style="width:<%= yellow_procent %>%"></div>
+    <div class="progress-bar progress-bar-danger" style="width:<%= red_procent %>%"></div>
+    <div class="progress-bar progress-bar-primary" style="width:<%= no_procent %>%">
+      <p><%= total_no_evaluation = (total - no) %> studente, not evaluated!</p>
+  </div>
   </div>
 </div>
 
@@ -120,8 +121,8 @@
         <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
       <% end %>
     <% end %>
-    <p> <%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
-    <p> <%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'delete_evaluation btn-sm btn-primary' %></p>
+    <p><%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
+    <p><%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'edit_student btn-sm btn-primary' %></p>
   </div>
   <% end %>
 </div>
