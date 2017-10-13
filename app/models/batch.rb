@@ -24,7 +24,6 @@ class Batch < ApplicationRecord
     @green_evaluations = []
     @yellow_evaluations = []
     @red_evaluations = []
-    @no_evaluatios = []
 
     @batch.students.each do |student|
       student.evaluations.last(1).each do |evaluation|
@@ -32,10 +31,8 @@ class Batch < ApplicationRecord
           @green_evaluations.push(student.id)
         elsif evaluation.yellow === true
           @yellow_evaluations.push(student.id)
-        elsif evaluation.red === true
-          @red_evaluations.push(student.id)
         else
-          @red_evaluatios.push(student.id)
+          @red_evaluations.push(student.id)
         end
       end
     end
