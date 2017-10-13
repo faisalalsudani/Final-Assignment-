@@ -1,4 +1,10 @@
 <%= form_for @batch, html: { multipart: true } do |f| %>
+
+  <ul>
+    <% @batch.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
   <div class="form-group">
     <label>Batch name</label>
     <%= f.text_field :name, class: "form-control" %>
@@ -6,12 +12,12 @@
 
   <div class="form-group">
     <label>Start date</label>
-    <%= f.date_select :startdate, class: "form-control" %>
+    <%= f.date_select :start_date, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <label>End date</label>
-    <%= f.date_select :enddate, class: "form-control" %>
+    <%= f.date_select :end_date, class: "form-control" %>
   </div>
 
 
