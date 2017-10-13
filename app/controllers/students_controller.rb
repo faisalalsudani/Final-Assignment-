@@ -22,7 +22,7 @@ class StudentsController < ApplicationController
       if @student.save
          redirect_to @student.batch
       else
-        render :new
+        redirect_to @student.batch, alert: "Student is not saved, you have to add first name!"
       end
 
   end

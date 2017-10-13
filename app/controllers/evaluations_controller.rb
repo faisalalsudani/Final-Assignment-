@@ -78,6 +78,6 @@ class EvaluationsController < ApplicationController
 
   private
   def evaluation_params
-    params.require(:evaluation).permit(:remarks, :green, :yellow, :red, :student_id, :date)
+    params.require(:evaluation).permit(:remarks, :green, :yellow, :rood, :student_id, :date)
   end
 end

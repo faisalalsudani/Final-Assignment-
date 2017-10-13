@@ -4,6 +4,7 @@
 <% green_evaluations = [] %>
 <% yellow_evaluations = [] %>
 <% red_evaluations = [] %>
+<% no_evaluations = [] %>
 
 <% @batch.students.each do |s| %>
   <% s.evaluations.last(1).each do |last_eva| %>
@@ -11,8 +12,10 @@
       <% yellow_evaluations.push(last_eva.yellow) %>
     <% elsif last_eva.green === true %>
       <% green_evaluations.push(last_eva.green) %>
-    <% else %>
+    <% elsif last_eva.red === true %>
       <% red_evaluations.push(last_eva.red) %>
+    <% else %>
+      <% no_evaluations.push(last_eva.red) %>
     <% end %>
   <% end %>
 <% end %>
@@ -20,7 +23,7 @@
 <% @batch.students_within_this_batch %>
 
 <div class="row">
-  <button type="button" class="btn btn-primary add-student" data-toggle="modal" data-target="#addNewEvaluation">
+  <button type="button" class="btn btn-primary random-student" data-toggle="modal" data-target="#addNewEvaluation">
   Evaluate a student
   </button>
   <br>
@@ -53,7 +56,7 @@
                  <%= f.date_field :date, :value => Time.now.strftime('%Y-%m-%d'), class: "form-control student_title" %>
               </div>
 
-              <div class="field" class="checkbox-inline">
+              <div class="field" style="display:inline-flex;" >
                 <%= f.check_box :green %>
                 <%= f.label :green, "Green", class: "green" %><br>
                 <%= f.check_box :yellow %>
@@ -78,21 +81,24 @@
 <% g = green_evaluations.length %>
 <% y = yellow_evaluations.length %>
 <% r = red_evaluations.length %>
+<% no = g + y + r %>
 
 <% total = @batch.students.length %>
-<% no_eva = (total - g - y - r) %>
+<% total_no_evaluation = (total - no) %>
 
 <% green_procent = (g.fdiv(total)) * 100 %>
 <% yellow_procent = (y.fdiv(total)) * 100 %>
 <% red_procent = (r.fdiv(total)) * 100 %>
-<% no_eva_procent = (no_eva.fdiv(total)) * 100 %>
+<% no_procent = (total_no_evaluation.fdiv(total)) * 100 %>
 
 <div class="row">
   <div class="progress">
-    <div class="progress-bar progress-bar-success progress-bar-animated" style="width:<%= green_procent %>%"></div>
-    <div class="progress-bar progress-bar-warning progress-bar-animated" style="width:<%= yellow_procent %>%"></div>
-    <div class="progress-bar progress-bar-danger progress-bar-animated" style="width:<%= red_procent %>%"></div>
-    <div class="progress-bar progress-bar-info progress-bar-animated" style="width:<%= no_eva_procent %>%"></div>
+    <div class="progress-bar progress-bar-success" style="width:<%= green_procent %>%"></div>
+    <div class="progress-bar progress-bar-warning" style="width:<%= yellow_procent %>%"></div>
+    <div class="progress-bar progress-bar-danger" style="width:<%= red_procent %>%"></div>
+    <div class="progress-bar progress-bar-primary" style="width:<%= no_procent %>%">
+      <p><%= total_no_evaluation = (total - no) %> studente, not evaluated!</p>
+  </div>
   </div>
 </div>
 
@@ -101,26 +107,22 @@
 
 <div class="row">
   <% @batch.students.each do |student| %>
-  <div class="col-md-3">
-    <div class="card" style="width: 20rem;">
-      <% student_path =  link_to student.photo, batch_student_path(@batch, student) %>
-      <img class="card-img-top" src="<%= student.photo %>" alt="Card image cap">
-      <div class="card-block">
-        <h4 class="card-title"><%= link_to student.first_name, batch_student_path(@batch, student)%></h4>
-        <p>Evaluations: <%= student.evaluations.length %></p>
-        <% student.evaluations.last(1).each do |e|%>
-          <% if e.green === true %>
-          <p style="background:#5cb85c; height: 20px;border-radius:4px;"><p>
-          <% elsif e.yellow === true %>
-          <p style="background:#f0ad4e; height: 20px;border-radius:4px;"></p>
-          <% elsif e.red === true %>
-          <p style="background:#d9534f; height: 20px;border-radius:4px;"></p>
-          <% else %>
-          <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+  <div class="col-md-3" style="height:200px;">
+    <p><%= link_to student.first_name, batch_student_path(@batch, student),  :class => '' %></p>
+    <p>Evaluations: <%= student.evaluations.length %></p>
+    <% student.evaluations.last(1).each do |e|%>
+      <% if e.green === true %>
+        <p style="background:#5cb85c; height: 20px;border-radius:4px;"></p>
+      <% elsif e.yellow === true %>
+        <p style="background:#f0ad4e; height: 20px;border-radius:4px;"></p>
+      <% elsif e.red === true %>
+        <p style="background:#d9534f; height: 20px;border-radius:4px;"></p>
+      <% else %>
+        <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
+      <% end %>
+    <% end %>
+    <p><%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
+    <p><%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'edit_student btn-sm btn-primary' %></p>
   </div>
   <% end %>
 </div>
