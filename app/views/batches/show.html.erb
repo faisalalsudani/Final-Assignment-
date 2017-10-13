@@ -105,24 +105,30 @@
 <br>
 
 
+
 <div class="row">
   <% @batch.students.each do |student| %>
-  <div class="col-md-3" style="height:200px;">
-    <p><%= link_to student.first_name, batch_student_path(@batch, student),  :class => '' %></p>
-    <p>Evaluations: <%= student.evaluations.length %></p>
-    <% student.evaluations.last(1).each do |e|%>
-      <% if e.green === true %>
-        <p style="background:#5cb85c; height: 20px;border-radius:4px;"></p>
-      <% elsif e.yellow === true %>
-        <p style="background:#f0ad4e; height: 20px;border-radius:4px;"></p>
-      <% elsif e.red === true %>
-        <p style="background:#d9534f; height: 20px;border-radius:4px;"></p>
-      <% else %>
-        <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
-      <% end %>
-    <% end %>
-    <p><%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></p>
-    <p><%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'edit_student btn-sm btn-primary' %></p>
+  <div class="col-md-3">
+    <div class="card" style="width: 20rem;">
+      <img class="card-img-top" src="<%= student.photo %>" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"><%= link_to student.full_name, batch_student_path(@batch, student),  :class => '' %></h4>
+          <% student.evaluations.last(1).each do |e|%>
+            <% if e.green === true %>
+              <p style="background:#5cb85c; height: 20px;border-radius:4px;"></p>
+            <% elsif e.yellow === true %>
+              <p style="background:#f0ad4e; height: 20px;border-radius:4px;"></p>
+            <% elsif e.red === true %>
+              <p style="background:#d9534f; height: 20px;border-radius:4px;"></p>
+            <% else %>
+              <p style="background:lightgrey; height: 20px;border-radius:4px;"></p>
+            <% end %>
+          <% end %>
+          <span><%= link_to 'Remove Student', batch_student_path(@batch, student), method: :delete, data: { confirm: 'Are you sure?' }, :remote => false, :class => 'delete_student btn-sm btn-danger' %></span>
+          <span><%= link_to 'Edit Student', edit_batch_student_path(@batch, student),:class => 'edit_student btn-sm btn-primary' %></span>
+          <hr>
+        </div>
+    </div>
   </div>
   <% end %>
 </div>

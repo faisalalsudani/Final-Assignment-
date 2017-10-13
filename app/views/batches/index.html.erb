@@ -4,11 +4,15 @@
 <hr>
 <div class="row">
   <% @batches.each do |batch| %>
-    <div class="col-md-3 batches">
-      <h4 class="card-title"><%= link_to batch.name, batch_path(batch) %></h4>
-      <p>Started on: <span><%= batch.start_date %>
-      </span></p>
-      <p>End on: <span> <%= batch.end_date %></span></p>
+  <div class="col-md-4">
+    <div class="card" style="width: 20rem;">
+    <img class="card-img-top" src="https://static-1.springest.com/uploads/product_image/image/20706/big-codaisseur-classroom-9.jpg" alt="Card image cap">
+    <div class="card-block">
+    <h4 class="card-title"><%= link_to batch.name, batch_path(batch) %></h4>
+    <p><span style="font-weight:bold;">Start on:</span> <%= batch.start_date.to_date %></p>
+    <p><span style="font-weight:bold;">End on:</span>  <%= batch.end_date.to_date %></p>
     </div>
+    </div>
+  </div>
   <% end %>
 </div>
