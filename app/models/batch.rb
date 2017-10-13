@@ -2,6 +2,13 @@ class Batch < ApplicationRecord
 
   has_many :students
 
+  def student_with_no_evaluation
+    @batch = Batch.find(id)
+    @batch.students.each do |student|
+      student.evaluations.length
+    end
+  end
+
   def students_within_this_batch
     @batch = Batch.find(id)
 
@@ -19,7 +26,7 @@ class Batch < ApplicationRecord
         elsif evaluation.red === true
           @red_evaluations.push(student.id)
         else
-          @red_evaluations.push(student.id)
+          @no_evaluatios.push(student.id)
         end
       end
     end
@@ -35,8 +42,10 @@ class Batch < ApplicationRecord
       @green_evaluations.sample
     elsif random_number <= 0.50
       @yellow_evaluations.sample
-    else
+    elsif random_number <= 1
       @red_evaluations.sample
+    else
+      @no_evaluatios.sample
     end
   end
 
