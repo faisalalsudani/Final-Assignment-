@@ -27,7 +27,6 @@
   Evaluate a student
   </button>
   <br>
-  <br>
 </div>
 
 <div class="modal fade" id="addNewEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,6 +63,7 @@
                 <%= f.check_box :red %>
                 <%= f.label :red, "Red", class: "red" %>
              </div>
+
           <div class="modal-footer">
             <button type="button" onclick="javascript:window.location.reload()" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <%= f.submit "Save", class: "btn btn-primary", id: "evaluation" %>

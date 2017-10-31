@@ -5,27 +5,18 @@ class Batch < ApplicationRecord
 
 
   def student_with_no_evaluation
-    @batch = Batch.find(id)
-    @batch.students.each do |student|
+    students.each do |student|
       student.evaluations.length
     end
   end
 
-  def all_students_in_this_batch
-    @batch = Batch.find(id)
-    @student = @batch.students.each do |s|
-      s.first_name
-    end
-  end
 
   def students_within_this_batch
-    @batch = Batch.find(id)
-
     @green_evaluations = []
     @yellow_evaluations = []
     @red_evaluations = []
 
-    @batch.students.each do |student|
+    students.each do |student|
       student.evaluations.last(1).each do |evaluation|
         if evaluation.green === true
           @green_evaluations.push(student.id)
@@ -42,7 +33,8 @@ class Batch < ApplicationRecord
 
 
   def random_student
-     random_number = rand()
+    students_within_this_batch
+    random_number = rand()
 
     if random_number <= 0.17
        @green_evaluations.sample
