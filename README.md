@@ -1,24 +1,30 @@
-# README
+# Que Rico cakes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is used for recording the performance of the students on daily basis. It helps the teacher to assign a color code and remarks for the students based on their performance.
 
-Things you may want to cover:
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+Make sure you have [Ruby](https://www.ruby-lang.org) and [Bundler](http://bundler.io) installed.
 
-* Configuration
+```
+git clone git@github.com:faisalalsudani/Quericocakes.git
+```
 
-* Database creation
+```
+bundle install
+```
 
-* Database initialization
+```
+rails db:create db:migrate db:seed
+```
 
-* How to run the test suite
+```
+rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Build with
 
-* Deployment instructions
-
-* ...
+- Ruby on rails
+- HTML & CSS
+- jQuery
