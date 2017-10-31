@@ -8,7 +8,7 @@ This app is used for recording the performance of the students on daily basis. I
 Make sure you have [Ruby](https://www.ruby-lang.org) and [Bundler](http://bundler.io) installed.
 
 ```
-git clone git@github.com:faisalalsudani/Quericocakes.git
+git clone git@github.com:faisalalsudani/Final-Assignment-.git
 ```
 
 ```
